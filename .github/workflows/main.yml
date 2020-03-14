@@ -21,16 +21,16 @@ jobs:
       - name: docker login
         uses: azure/docker-login@v1
         with:
-           login-server: ccr.ccs.tencentyun.com
-           username: ${{ secrets.REGISTRY_USERNAME }}
-           password: ${{ secrets.REGISTRY_PASSWORD }}
+           login-server: registry.cn-hangzhou.aliyuncs.com
+           username: ${{ secrets.username }}
+           password: ${{ secrets.password }}
          
       - name: sync
         run :
             docker pull mcr.microsoft.com/dotnet/core/sdk:2.2.401
             docker pull mcr.microsoft.com/dotnet/core/aspnet:2.2
-            docker tag mcr.microsoft.com/dotnet/core/sdk:2.2.401 ccr.ccs.tencentyun.com/dotnet-core/sdk:2.2.401
-            docker tag mcr.microsoft.com/dotnet/core/aspnet:2.2 ccr.ccs.tencentyun.com/dotnet-core/aspnet:2.2
-            docker push ccr.ccs.tencentyun.com/dotnet-core/sdk:2.2.401
-            docker push ccr.ccs.tencentyun.com/dotnet-core/aspnet:2.2
+            docker tag mcr.microsoft.com/dotnet/core/sdk:2.2.401 registry.cn-hangzhou.aliyuncs.com/dotnet-core/sdk:2.2.401
+            docker tag mcr.microsoft.com/dotnet/core/aspnet:2.2 registry.cn-hangzhou.aliyuncs.com/dotnet-core/aspnet:2.2
+            docker push registry.cn-hangzhou.aliyuncs.com/dotnet-core/sdk:2.2.401
+            docker push registry.cn-hangzhou.aliyuncs.com/dotnet-core/aspnet:2.2
     
