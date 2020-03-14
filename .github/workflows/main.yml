@@ -17,15 +17,16 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    steps:
-      -  uses: azure/docker-login@v1
-         with:
+    steps: 
+      - name: docker login
+        uses: azure/docker-login@v1
+        with:
            login-server: ccr.ccs.tencentyun.com
            username: ${{ secrets.REGISTRY_USERNAME }}
            password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: sync-docker-mirrors
-       
-        run:
+         
+      - name: sync
+        run :
             docker pull mcr.microsoft.com/dotnet/core/sdk:2.2.401
             docker pull mcr.microsoft.com/dotnet/core/aspnet:2.2
             docker tag mcr.microsoft.com/dotnet/core/sdk:2.2.401 ccr.ccs.tencentyun.com/dotnet-core/sdk:2.2.401
