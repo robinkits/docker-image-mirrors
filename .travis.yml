@@ -1,0 +1,18 @@
+language: bash
+services:
+  - docker
+sudo: required
+branches:
+  only:
+    - master
+script:
+  - docker pull mcr.microsoft.com/dotnet/core/sdk:2.2.401
+  - docker pull mcr.microsoft.com/dotnet/core/aspnet:2.2
+
+after_success:
+  #登录registry的用户名是您的腾讯云的账号ID，密码是您开通镜像仓库服务时设置的密码
+  - sudo docker login --username=[ID] --password=[密码] ccr.ccs.tencentyun.com
+  - sudo docker tag mcr.microsoft.com/dotnet/core/sdk:2.2.401 ccr.ccs.tencentyun.com/dotnet-core/sdk:2.2.401
+  - sudo docker tag mcr.microsoft.com/dotnet/core/aspnet:2.2 ccr.ccs.tencentyun.com/dotnet-core/aspnet:2.2
+  - sudo docker push ccr.ccs.tencentyun.com/dotnet-core/sdk:2.2.401
+  - sudo docker push ccr.ccs.tencentyun.com/dotnet-core/aspnet:2.2
