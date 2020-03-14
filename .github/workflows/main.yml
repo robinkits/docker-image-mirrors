@@ -25,12 +25,13 @@ jobs:
            username: ${{ secrets.username }}
            password: ${{ secrets.password }}
          
-      - name: sync
+      - name: pull mcr.microsoft.com/dotnet/core/sdk:2.2.401
         run :
             docker pull mcr.microsoft.com/dotnet/core/sdk:2.2.401
-            docker pull mcr.microsoft.com/dotnet/core/aspnet:2.2
-            docker tag mcr.microsoft.com/dotnet/core/sdk:2.2.401 registry.cn-hangzhou.aliyuncs.com/dotnet-core/sdk:2.2.401
-            docker tag mcr.microsoft.com/dotnet/core/aspnet:2.2 registry.cn-hangzhou.aliyuncs.com/dotnet-core/aspnet:2.2
-            docker push registry.cn-hangzhou.aliyuncs.com/dotnet-core/sdk:2.2.401
-            docker push registry.cn-hangzhou.aliyuncs.com/dotnet-core/aspnet:2.2
+      - name: tag docker img
+        run :
+            docker tag mcr.microsoft.com/dotnet/core/sdk:2.2.401 registry.cn-hangzhou.aliyuncs.com/dotnet-core/sdk:2.2.401 
+      - name: push img
+        run:
+            docker push registry.cn-hangzhou.aliyuncs.com/dotnet-core/sdk:2.2.401 
     
